@@ -1,0 +1,16 @@
+.farmContainer {
+    position: relative;
+    width: 300px;
+}
+
+.animalsListContainer {
+}
+
+.separator {
+    margin: 10px 0;
+    border-top: 1px solid silver;
+}
+
+.controlsContainer {
+
+}
