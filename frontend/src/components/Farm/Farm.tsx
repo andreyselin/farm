@@ -1,4 +1,4 @@
-import { FC, useCallback, useState } from 'react';
+import { FC } from 'react';
 import { Animal } from '../../types.ts';
 import styles from './Farm.module.css';
 import { AnimalsListItem } from '../AnimalsListItem';
@@ -13,8 +13,6 @@ type FarmProps = {
 }
 
 export const Farm: FC<FarmProps> = ({ isLoading, animals, onAdd, onRemove }) => {
-  const [isAddModalVisible, setIsAddModalVisible] = useState(false);
-
   return (
     <div className={styles.farmContainer}>
       { isLoading ? <LoadingOverlay /> : null }

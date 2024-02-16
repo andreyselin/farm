@@ -1,47 +1,36 @@
 import { Animal } from './types.ts';
-
-const memo: Animal[] = [];
+import { toast } from 'react-toastify';
 
 class Api {
-  apiBaseUrl = 'http://localhost:3007'
+  apiBaseUrl = 'http://localhost:3008'
 
   async listAnimals(): Promise<Animal[]> {
-    return [...memo];
-
-    // const response = await fetch(`${this.apiBaseUrl}/list`);
-    // return await response.json();
+    const response = await fetch(`${this.apiBaseUrl}/list`);
+    return await response.json();
   }
 
   async addAnimal(animal: Animal): Promise<Animal[] | null> {
-    const isAbleToAdd = !memo.some(el => el.name === animal.name);
-    if (isAbleToAdd) {
-      memo.push(animal);
-    }
-    return [...memo];
+    const response = await fetch(`${this.apiBaseUrl}/add?name=${animal.name}`);
+    const data = await response.json();
 
-    try {
-      const response = await fetch(`${this.apiBaseUrl}/add?name=${animal.name}`);
-      return await response.json();
-    } catch (e) {
-      // Todo: toast
+    if (!response.ok) {
+      toast.error(data.message);
       return null;
     }
+
+    return data;
   }
 
-  async removeAnimal (animal: Animal): Promise<Animal[] | null> {
-    const index = memo.findIndex(el => el.name === animal.name);
-    if (index > -1) {
-      memo.splice(index, 1);
-    }
-    return [...memo];
+  async removeAnimal(animal: Animal): Promise<Animal[] | null> {
+    const response = await fetch(`${this.apiBaseUrl}/remove?name=${animal.name}`);
+    const data = await response.json();
 
-    try {
-      const response = await fetch(`${this.apiBaseUrl}/remove?name=${animal.name}`);
-      return await response.json();
-    } catch (e) {
-      // Todo: toast
+    if (!response.ok) {
+      toast.error(data.message);
       return null;
     }
+
+    return data;
   }
 }
 
