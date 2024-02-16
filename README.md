@@ -10,4 +10,4 @@ Start frontend with:
 cd frontend && yarn && yarn start
 ```
 
-Application running at http://localhost:5173/
+Application is running at http://localhost:5173/
